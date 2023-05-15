@@ -40,5 +40,5 @@ print(ne_tree)  # Output: (S (GPE The/DT) quick/JJ brown/NN fox/NN jumps/VBZ ove
 # Sentiment analysis
 sia = SentimentIntensityAnalyzer()
 sentiment_scores = sia.polarity_scores(text)
-print(sentiment_scores)  # Output: {'neg': 0.0, 'neu': 0.556, 'pos': 0.444, 'compound': 0.0}
-
+#print(sentiment_scores)  # Output: {'neg': 0.0, 'neu': 0.556, 'pos': 0.444, 'compound': 0.0}
+print(sentiment_scores)
