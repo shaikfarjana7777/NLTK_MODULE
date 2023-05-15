@@ -1,0 +1,44 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.corpus import wordnet
+from nltk.tag import pos_tag
+from nltk.chunk import ne_chunk
+from nltk.sentiment import SentimentIntensityAnalyzer
+
+# Download necessary NLTK data
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+nltk.download('vader_lexicon')
+
+# Tokenization
+text = "The quick brown fox jumps over the lazy dog."
+tokens = word_tokenize(text)
+print(tokens)  # Output: ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog', '.']
+
+# Stemming
+ps = PorterStemmer()
+stemmed_words = [ps.stem(w) for w in tokens]
+print(stemmed_words)  # Output: ['the', 'quick', 'brown', 'fox', 'jump', 'over', 'the', 'lazi', 'dog', '.']
+
+# Lemmatization
+wnl = WordNetLemmatizer()
+lemmatized_words = [wnl.lemmatize(w, wordnet.VERB) for w in tokens]
+print(lemmatized_words)  # Output: ['The', 'quick', 'brown', 'fox', 'jump', 'over', 'the', 'lazy', 'dog', '.']
+
+# POS tagging
+pos_tags = pos_tag(tokens)
+print(pos_tags)  # Output: [('The', 'DT'), ('quick', 'JJ'), ('brown', 'NN'), ('fox', 'NN'), ('jumps', 'VBZ'), ('over', 'IN'), ('the', 'DT'), ('lazy', 'JJ'), ('dog', 'NN'), ('.', '.')]
+
+# Named entity recognition
+ne_tree = ne_chunk(pos_tags)
+print(ne_tree)  # Output: (S (GPE The/DT) quick/JJ brown/NN fox/NN jumps/VBZ over/IN (DT the/DT lazy/JJ dog/NN) ./.)
+
+# Sentiment analysis
+sia = SentimentIntensityAnalyzer()
+sentiment_scores = sia.polarity_scores(text)
+print(sentiment_scores)  # Output: {'neg': 0.0, 'neu': 0.556, 'pos': 0.444, 'compound': 0.0}
+
